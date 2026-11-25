@@ -1,0 +1,97 @@
+:root {
+  --magenta: #b5237a;
+  --pink: #d6409f;
+  --violet: #7a2a8c;
+  --plum: #2e1a3a;
+  --blush: #fbe3f0;
+  --cream: #fcf6f3;
+  --ink: #2e1a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+main {
+  max-width: 1000px;
+  margin: 64px auto;
+  padding: 48px;
+  background: white;
+  border: 1px solid #eadce5;
+  border-radius: 20px;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-family: Georgia, serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+}
+
+p {
+  color: #6f6370;
+  font-size: 1.2rem;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: linear-gradient(100deg, var(--magenta), var(--violet));
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  padding: 20px 0 56px;
+  border-bottom: 1px solid #eadce5;
+}
+
+.eyebrow {
+  color: var(--magenta);
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.services {
+  padding-top: 36px;
+  scroll-margin-top: 24px;
+}
+
+.services h2 {
+  font-family: Georgia, serif;
+  font-size: 2.5rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.service-card {
+  padding: 22px;
+  border: 1px solid #eadce5;
+  border-radius: 16px;
+  background: #fffafa;
+}
+
+.service-card h3 {
+  color: var(--magenta);
+  font-family: Georgia, serif;
+}
+
+.service-card li {
+  margin: 10px 0;
+  color: #6f6370;
+}
