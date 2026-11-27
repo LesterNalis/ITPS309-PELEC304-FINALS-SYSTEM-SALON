@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+  <meta charset="utf-8">
+  <title>Request an appointment | Kathy Limpiada Salon</title>
+</head>
+<body>
+  <main>
+    <h1>Request an appointment</h1>
+    <p>Your request will be reviewed by the salon.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Send request</button>
+    </form>
+  </main>
+</body>
+</html>

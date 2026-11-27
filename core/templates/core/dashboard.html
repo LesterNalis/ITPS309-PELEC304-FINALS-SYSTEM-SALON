@@ -1,0 +1,122 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salon Dashboard</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body class="dashboard-page">
+  <div class="salon-layout">
+    <aside class="salon-sidebar">
+      <a href="/" class="brand">Kathy Limpiada <span>Salon</span></a>
+
+      <nav aria-label="Dashboard navigation">
+        <a class="active" href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="/admin/core/appointment/">Appointments</a>
+        <a href="/admin/core/customer/">Customers</a>
+        <a href="/admin/core/service/">Services</a>
+        <a href="/admin/core/employee/">Employees</a>
+        <a href="/admin/core/product/">Inventory</a> 
+        <a href="{% url 'sales_report' %}">Reports</a>
+        <a href="/admin/">Settings</a>
+      </nav>
+    </aside>
+
+    <div class="salon-workspace">
+      <header class="dashboard-header">
+        <div>
+          <a href="/" class="brand">Kathy Limpiada <span>Salon</span></a>
+          <div>{% now "l, F j, Y" %}</div>
+        </div>
+        <nav aria-label="Account navigation">
+          <a href="/">Public site</a>
+          <a href="/admin/">Manage records</a>
+        </nav>
+      </header>
+
+      <main class="dashboard-main">
+        <p class="eyebrow">Salon overview</p>
+        <h1>Welcome back</h1>
+        <p>{{ today|date:"l, F j, Y" }}</p>
+
+        <section class="dashboard-cards" aria-label="Salon statistics">
+          <article>
+            <span>Today’s appointments</span>
+            <strong>{{ today_count }}</strong>
+          </article>
+          <article>
+            <span>Pending requests</span>
+            <strong>{{ pending_count }}</strong>
+          </article>
+          <article>
+            <span>Customers</span>
+            <strong>{{ customer_count }}</strong>
+          </article>
+          <article>
+            <span>Active employees</span>
+            <strong>{{ employee_count }}</strong>
+          </article>
+          <article>
+            <span>Available services</span>
+            <strong>{{ service_count }}</strong>
+          </article>
+          <article>
+            <span>Paid sales total</span>
+            <strong>₱{{ revenue|floatformat:2 }}</strong>
+            <span>{{ paid_sales_count }} paid sales</span>
+          </article>
+          <article>
+            <span>Products to restock</span>
+            <strong>{{ low_stock_count }}</strong>
+          </article>
+        </section>
+
+        <section class="dashboard-panel">
+          <h2>Upcoming appointments</h2>
+
+          {% for appointment in upcoming %}
+            <div class="appointment-row">
+              <div>
+                <strong>{{ appointment.customer_name }}</strong>
+                <span>
+                  {{ appointment.service.name }} · {{ appointment.status|title }}
+                  {% if appointment.stylist %} · {{ appointment.stylist.name }}{% endif %}
+                </span>
+              </div>
+              <time>
+                {{ appointment.appointment_date|date:"M j" }},
+                {{ appointment.appointment_time|time:"g:i A" }}
+              </time>
+            </div>
+          {% empty %}
+            <p>No upcoming appointments yet.</p>
+          {% endfor %}
+
+          <a class="button" href="/admin/core/appointment/">Manage appointments</a>
+        </section>
+
+        <section class="dashboard-panel">
+          <h2>Low stock</h2>
+
+          {% for product in low_stock %}
+            <div class="appointment-row">
+              <strong>{{ product.name }}</strong>
+              <span>
+                {{ product.stock_quantity }} left · Restock at {{ product.reorder_level }}
+              </span>
+            </div>
+          {% empty %}
+            <p>All active products are above their restock levels.</p>
+          {% endfor %}
+
+          <a class="button" href="/admin/core/product/">Manage inventory</a>
+          <a class="button" href="{% url 'adjust_stock' %}">Adjust stock</a>
+          <a class="button" href="/admin/core/sale/">View sales</a>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

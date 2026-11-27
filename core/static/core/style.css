@@ -6,6 +6,10 @@
   --blush: #fbe3f0;
   --cream: #fcf6f3;
   --ink: #2e1a3a;
+  --muted: #6f6370;
+  --line: #eadce5;
+  --white: #ffffff;
+  --danger: #9b2c2c;
 }
 
 * {
@@ -17,42 +21,45 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: Arial, sans-serif;
+  line-height: 1.6;
 }
+
+a {
+  color: var(--magenta);
+}
+
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* Public homepage */
 
 main {
   max-width: 1000px;
   margin: 64px auto;
   padding: 48px;
-  background: white;
-  border: 1px solid #eadce5;
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: 20px;
 }
 
-h1 {
-  margin-bottom: 12px;
+h1,
+h2,
+h3 {
+  color: var(--plum);
   font-family: Georgia, serif;
+}
+
+h1 {
+  margin: 0 0 12px;
   font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1.1;
 }
 
 p {
-  color: #6f6370;
-  font-size: 1.2rem;
-}
-
-.button {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 14px 22px;
-  border-radius: 10px;
-  background: linear-gradient(100deg, var(--magenta), var(--violet));
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.hero {
-  padding: 20px 0 56px;
-  border-bottom: 1px solid #eadce5;
+  color: var(--muted);
+  font-size: 1.1rem;
 }
 
 .eyebrow {
@@ -63,13 +70,37 @@ p {
   text-transform: uppercase;
 }
 
+.hero {
+  padding: 20px 0 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.button {
+  display: inline-block;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(100deg, var(--magenta), var(--violet));
+  color: var(--white);
+  font: inherit;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(1.08);
+}
+
 .services {
   padding-top: 36px;
   scroll-margin-top: 24px;
 }
 
 .services h2 {
-  font-family: Georgia, serif;
   font-size: 2.5rem;
 }
 
@@ -81,17 +112,293 @@ p {
 
 .service-card {
   padding: 22px;
-  border: 1px solid #eadce5;
+  border: 1px solid var(--line);
   border-radius: 16px;
   background: #fffafa;
 }
 
 .service-card h3 {
   color: var(--magenta);
-  font-family: Georgia, serif;
 }
 
 .service-card li {
   margin: 10px 0;
-  color: #6f6370;
+  color: var(--muted);
+}
+
+/* Booking forms */
+
+form p {
+  margin: 20px 0;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid #cbbdc7;
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+}
+
+form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+form button {
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(100deg, var(--magenta), var(--violet));
+  color: var(--white);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.errorlist {
+  color: var(--danger);
+}
+
+/* Dashboard layout and navigation */
+
+.dashboard-page {
+  min-height: 100vh;
+}
+
+.salon-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.salon-sidebar {
+  position: sticky;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  flex: 0 0 250px;
+  padding: 28px 18px;
+  background: var(--white);
+  border-right: 1px solid var(--line);
+}
+
+.salon-sidebar .brand {
+  display: block;
+  margin: 4px 8px 32px;
+}
+
+.brand {
+  color: var(--plum);
+  font: bold 1.3rem Georgia, serif;
+  text-decoration: none;
+}
+
+.brand span {
+  color: var(--magenta);
+}
+
+.salon-sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+
+.salon-sidebar nav a {
+  padding: 13px 14px;
+  border-radius: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.salon-sidebar nav a:hover {
+  background: var(--blush);
+  color: var(--plum);
+}
+
+.salon-sidebar nav a.active {
+  background: linear-gradient(100deg, var(--magenta), var(--violet));
+  color: var(--white);
+  font-weight: bold;
+}
+
+.salon-workspace {
+  min-width: 0;
+  flex: 1;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 5%;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.dashboard-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-header nav a {
+  color: var(--plum);
+  text-decoration: none;
+}
+
+.dashboard-main {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.dashboard-main h1,
+.dashboard-panel h2 {
+  font-family: Georgia, serif;
+}
+
+/* Dashboard cards and panels */
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.dashboard-cards article,
+.dashboard-panel {
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.dashboard-cards span,
+.appointment-row span {
+  display: block;
+  color: var(--muted);
+}
+
+.dashboard-cards strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--plum);
+  font: 2rem Georgia, serif;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-panel {
+  margin: 20px 0;
+}
+
+.dashboard-panel h2 {
+  margin-top: 0;
+}
+
+.appointment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dashboard-panel .button + .button {
+  margin-left: 8px;
+}
+
+/* Sales report filters */
+
+.report-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr)) auto;
+  align-items: end;
+  gap: 16px;
+}
+
+.report-filters label {
+  margin: 0;
+}
+
+.report-filters .button {
+  margin: 0;
+}
+
+/* Small screens */
+
+@media (max-width: 760px) {
+  .salon-layout {
+    display: block;
+    padding-bottom: 72px;
+  }
+
+  .salon-sidebar {
+    position: fixed;
+    z-index: 10;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    border-top: 1px solid var(--line);
+    border-right: 0;
+  }
+
+  .salon-sidebar .brand {
+    display: none;
+  }
+
+  .salon-sidebar nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .salon-sidebar nav a {
+    flex: 0 0 auto;
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-main {
+    padding: 28px 16px;
+  }
+
+  main:not(.dashboard-main) {
+    margin: 24px 12px;
+    padding: 24px;
+  }
+
+  .report-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

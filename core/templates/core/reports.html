@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sales Report | Kathy Limpiada Salon</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body class="dashboard-page">
+  <header class="dashboard-header">
+    <a href="/dashboard/" class="brand">Kathy Limpiada <span>Salon</span></a>
+    <nav>
+      <a href="/dashboard/">Dashboard</a>
+      <a href="/admin/">Manage records</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-main">
+    <p class="eyebrow">Business overview</p>
+    <h1>Sales report</h1>
+
+    <section class="dashboard-panel">
+      <form method="get" class="report-filters">
+        <label>
+          From
+          <input type="date" name="from" value="{{ start_date|date:'Y-m-d' }}">
+        </label>
+        <label>
+          To
+          <input type="date" name="to" value="{{ end_date|date:'Y-m-d' }}">
+        </label>
+        <button class="button" type="submit">Update report</button>
+      </form>
+    </section>
+
+    <section class="dashboard-cards">
+      <article>
+        <span>Paid revenue</span>
+        <strong>₱{{ total_revenue|floatformat:2 }}</strong>
+      </article>
+      <article>
+        <span>Paid sales</span>
+        <strong>{{ sale_count }}</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-panel">
+      <h2>Revenue by service</h2>
+
+      {% for item in service_totals %}
+        <div class="appointment-row">
+          <strong>{{ item.service__name|default:"Other sale" }}</strong>
+          <span>{{ item.sale_count }} sales · ₱{{ item.revenue|floatformat:2 }}</span>
+        </div>
+      {% empty %}
+        <p>No paid sales in this date range.</p>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
